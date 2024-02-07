@@ -81,5 +81,14 @@ while True:
     
     try:
         #print("try")
-
+                 #Step -7
+         # Find contour with maximum area
+        cm = max(cnts, key=lambda x: cv2.contourArea(x))
+        #print("C==",cnts)
+        epsilon = 0.0005*cv2.arcLength(cm,True)
+        data= cv2.approxPolyDP(cm,epsilon,True)
+    
+        hull = cv2.convexHull(cm)
         
+        cv2.drawContours(crop_image, [cm], -1, (50, 50, 150), 2)
+        cv2.drawContours(crop_image, [hull], -1, (0, 255, 0), 2)
