@@ -62,3 +62,8 @@ while True:
     lower_bound = np.array([l_h, l_s, l_v])
     upper_bound = np.array([u_h, u_s, u_v])
     
+        #Step - 4
+    #Creating Mask
+    mask = cv2.inRange(hsv, lower_bound, upper_bound)
+    #filter mask with image
+    filtr = cv2.bitwise_and(crop_image, crop_image, mask=mask)
