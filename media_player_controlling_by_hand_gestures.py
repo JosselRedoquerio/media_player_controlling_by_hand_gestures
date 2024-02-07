@@ -47,3 +47,18 @@ while True:
     # Get hand data from the rectangle sub window
     cv2.rectangle(frame, (0,1), (300,500), (255, 0, 0), 0)
     crop_image = frame[1:500, 0:300]
+
+        #Step -2
+    hsv = cv2.cvtColor(crop_image, cv2.COLOR_BGR2HSV)
+    #detecting hand
+    l_h = cv2.getTrackbarPos("Lower_H", "Color Adjustments")
+    l_s = cv2.getTrackbarPos("Lower_S", "Color Adjustments")
+    l_v = cv2.getTrackbarPos("Lower_V", "Color Adjustments")
+
+    u_h = cv2.getTrackbarPos("Upper_H", "Color Adjustments")
+    u_s = cv2.getTrackbarPos("Upper_S", "Color Adjustments")
+    u_v = cv2.getTrackbarPos("Upper_V", "Color Adjustments")
+    #Step -3
+    lower_bound = np.array([l_h, l_s, l_v])
+    upper_bound = np.array([u_h, u_s, u_v])
+    
