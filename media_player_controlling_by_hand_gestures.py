@@ -67,3 +67,19 @@ while True:
     mask = cv2.inRange(hsv, lower_bound, upper_bound)
     #filter mask with image
     filtr = cv2.bitwise_and(crop_image, crop_image, mask=mask)
+
+        #Step - 5
+    mask1  = cv2.bitwise_not(mask)
+    m_g = cv2.getTrackbarPos("Thresh", "Color Adjustments") #getting track bar value
+    ret,thresh = cv2.threshold(mask1,m_g,255,cv2.THRESH_BINARY)
+    dilata = cv2.dilate(thresh,(3,3),iterations = 6)
+    
+    #Step -6
+    #findcontour(img,contour_retrival_mode,method)
+    cnts,hier = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+    
+    
+    try:
+        #print("try")
+
+        
