@@ -145,3 +145,16 @@ while True:
            
     except:
         pass
+
+        #step -10    
+    cv2.imshow("Thresh", thresh)
+    #cv2.imshow("mask==",mask)
+    cv2.imshow("filter==",filtr)
+    cv2.imshow("Result", frame)
+
+    key = cv2.waitKey(25) &0xFF    
+    if key == 27: 
+        break
+cap.release()
+cv2.destroyAllWindows()
+
