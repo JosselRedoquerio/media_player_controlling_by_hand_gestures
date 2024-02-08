@@ -119,4 +119,29 @@ while True:
         
         print("count==",count_defects)
         
-        
+                #Step - 9 
+        # Print number of fingers
+        if count_defects == 0:
+            
+            cv2.putText(frame, " ", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2,(0,0,255),2)
+        elif count_defects == 1:
+            
+            p.press("space")
+            cv2.putText(frame, "Play/Pause", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2,(0,0,255), 2)
+        elif count_defects == 2:
+            p.press("up")
+            
+            cv2.putText(frame, "Volume UP", (5, 50), cv2.FONT_HERSHEY_SIMPLEX, 2,(0,0,255), 2)
+        elif count_defects == 3:
+            p.press("down")
+            
+            cv2.putText(frame, "Volume Down", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2,(0,0,255), 2)
+        elif count_defects == 4:
+            p.press("right")
+            
+            cv2.putText(frame, "Forward", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2,(0,0,255), 2)
+        else:
+            pass
+           
+    except:
+        pass
