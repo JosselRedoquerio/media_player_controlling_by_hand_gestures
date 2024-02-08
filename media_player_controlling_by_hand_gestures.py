@@ -47,8 +47,8 @@ while True:
     # Get hand data from the rectangle sub window
     cv2.rectangle(frame, (0,1), (300,500), (255, 0, 0), 0)
     crop_image = frame[1:500, 0:300]
-
-        #Step -2
+    
+    #Step -2
     hsv = cv2.cvtColor(crop_image, cv2.COLOR_BGR2HSV)
     #detecting hand
     l_h = cv2.getTrackbarPos("Lower_H", "Color Adjustments")
@@ -62,13 +62,13 @@ while True:
     lower_bound = np.array([l_h, l_s, l_v])
     upper_bound = np.array([u_h, u_s, u_v])
     
-        #Step - 4
+    #Step - 4
     #Creating Mask
     mask = cv2.inRange(hsv, lower_bound, upper_bound)
     #filter mask with image
     filtr = cv2.bitwise_and(crop_image, crop_image, mask=mask)
-
-        #Step - 5
+    
+    #Step - 5
     mask1  = cv2.bitwise_not(mask)
     m_g = cv2.getTrackbarPos("Thresh", "Color Adjustments") #getting track bar value
     ret,thresh = cv2.threshold(mask1,m_g,255,cv2.THRESH_BINARY)
@@ -81,7 +81,7 @@ while True:
     
     try:
         #print("try")
-                 #Step -7
+         #Step -7
          # Find contour with maximum area
         cm = max(cnts, key=lambda x: cv2.contourArea(x))
         #print("C==",cnts)
@@ -92,3 +92,4 @@ while True:
         
         cv2.drawContours(crop_image, [cm], -1, (50, 50, 150), 2)
         cv2.drawContours(crop_image, [hull], -1, (0, 255, 0), 2)
+        
