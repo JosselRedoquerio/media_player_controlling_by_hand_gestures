@@ -92,4 +92,31 @@ while True:
         
         cv2.drawContours(crop_image, [cm], -1, (50, 50, 150), 2)
         cv2.drawContours(crop_image, [hull], -1, (0, 255, 0), 2)
+
+                
+        #Step - 8
+        # Find convexity defects
+        hull = cv2.convexHull(cm, returnPoints=False)
+        defects = cv2.convexityDefects(cm, hull)
+        count_defects = 0
+        #print("Area==",cv2.contourArea(hull) - cv2.contourArea(cm))
+        for i in range(defects.shape[0]):
+            s,e,f,d = defects[i,0]
+           
+            start = tuple(cm[s][0])
+            end = tuple(cm[e][0])
+            far = tuple(cm[f][0])
+            #Cosin Rule
+            a = math.sqrt((end[0] - start[0]) ** 2 + (end[1] - start[1]) ** 2)
+            b = math.sqrt((far[0] - start[0]) ** 2 + (far[1] - start[1]) ** 2)
+            c = math.sqrt((end[0] - far[0]) ** 2 + (end[1] - far[1]) ** 2)
+            angle = (math.acos((b ** 2 + c ** 2 - a ** 2) / (2 * b * c)) * 180) / 3.14
+            #print(angle)
+            # if angle <= 50 draw a circle at the far point
+            if angle <= 50:
+                count_defects += 1
+                cv2.circle(crop_image,far,5,[255,255,255],-1)
+        
+        print("count==",count_defects)
+        
         
